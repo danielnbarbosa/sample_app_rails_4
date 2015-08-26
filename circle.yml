@@ -1,0 +1,27 @@
+# circle.yml
+
+machine:
+  python:
+    version: 2.7.3
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - pip install awscli
+    - cp config/secrets_example.yml config/secrets.yml
+
+  override:
+    - docker info
+    - docker version
+    - docker build -t danielnbarbosa/sample_app_rails_4:$CIRCLE_SHA1 .
+
+database:
+  override:
+    - ls
+
+test:
+  override:
+    - docker run danielnbarbosa/sample_app_rails_4:$CIRCLE_SHA1 bundle exec rspec spec/
+    - docker run -d -p 80:3000 danielnbarbosa/sample_app_rails_4:$CIRCLE_SHA1; sleep 5
+    - curl --retry 3 --retry-delay 3 -v http://localhost
