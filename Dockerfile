@@ -1,5 +1,8 @@
 FROM ruby:2.0
 
+# install os packages
+RUN apt-get update -y && apt-get install -y nodejs
+
 # install gems
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
