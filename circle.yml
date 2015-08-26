@@ -9,7 +9,7 @@ machine:
 dependencies:
   pre:
     - pip install awscli
-    - cp config/secrets_example.yml config/secrets.yml
+    - cp config/database.yml.example config/database.yml
 
   override:
     - docker info
