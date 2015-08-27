@@ -19,7 +19,7 @@ dependencies:
     - touch -t 200001010000.00 Gemfile Gemfile.lock
     - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
     - docker build -t danielnbarbosa/sample_app_rails_4:$CIRCLE_SHA1 .
-    - mkdir -p ~/docker; docker save -o ~/docker/image.tar peartherapeutics/pear_server_rails:$CIRCLE_SHA1
+    - mkdir -p ~/docker; docker save -o ~/docker/image.tar danielnbarbosa/sample_app_rails_4:$CIRCLE_SHA1
 
 database:
   override:
